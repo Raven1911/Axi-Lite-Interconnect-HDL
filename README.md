@@ -21,4 +21,9 @@ itself. The following diagram shows how AXI is used to interface an interconnect
 > * AXI in a multi-master system:
 > ![alt text](docs/axi2.png)
 
-
+> * AXI channels - The AXI specification describes a point-to-point protocol between two interfaces: a master and a 
+slave. The following diagram shows the five main channels that each AXI interface uses for communication:  
+> ![alt text](docs/axi3.png)
+> Write operations use the following channels: 
+> * * The master sends an address on the Write Address (AW) channel and transfers data on the Write 
+Data (W) channel to the slave.   
