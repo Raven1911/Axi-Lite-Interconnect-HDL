@@ -82,3 +82,5 @@ while enforcing AXI ordering rules.
 > ![alt text](docs/AXI_LITE_INTERCONNECT.drawio.png)
 
 ## 2.   Arbiter State Machine
+![alt text](docs/AISoC-arbiter_state_machine.drawio.png)
+>
