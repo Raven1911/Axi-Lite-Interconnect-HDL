@@ -45,3 +45,9 @@ write operation, it responds with a message to the master on the Write Response 
 # IV. Concept AXI-LITE-INTERCONNECT
 
 > ![alt text](docs/AISoC-AXI_LITE_INTERCONNECT.drawio.png)
+>
+## 1.  N-to-1 Interconnect
+
+## 2.  1-to-N Interconnect
+
+## 3.  N-to-M Interconnect
