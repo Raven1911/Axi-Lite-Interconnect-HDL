@@ -47,7 +47,20 @@ write operation, it responds with a message to the master on the Write Response 
 > ![alt text](docs/AISoC-AXI_LITE_INTERCONNECT.drawio.png)
 >
 ## 1.  N-to-1 Interconnect
+> A common degenerate configuration of the AXI Interconnect core occurs when multiple master devices arbitrate for 
+access to a single slave device, typically a memory controller.
 
+> In these cases, address decoding logic might be unnecessary and omitted from the AXI Interconnect core (unless the 
+optional address range validation is enabled). Any of the optional conversion functions, such as data width and 
+clock rate conversion, can also be performed in this configuration as shown in Figure 4.
+
+>![alt text](docs/axi4.png)
 ## 2.  1-to-N Interconnect
+> Another degenerative configuration of the AXI Interconnect core occurs when a single master device, typically, a 
+processor, accesses multiple memory-mapped slave peripherals. In these cases, arbitration (in the address and 
+Write data paths) is not performed, as shown in Figure 5.
+
+> ![alt text](docs/axi5.png)
 
 ## 3.  N-to-M Interconnect
+> ![alt text](docs/axi6.png)
