@@ -16,11 +16,9 @@ transactions to up to 16 connected slave devices.
 # III. Overview
 > * AXI is an interface specification that defines the interface of IP blocks, rather than the interconnect 
 itself. The following diagram shows how AXI is used to interface an interconnect component:
->
 > ![alt text](docs/axi1.png)
 
 > * AXI in a multi-master system:
-> 
 > ![alt text](docs/axi2.png)
 
 
