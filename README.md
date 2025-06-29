@@ -84,3 +84,8 @@ while enforcing AXI ordering rules.
 ## 2.   Arbiter State Machine
 ![alt text](docs/AISoC-arbiter_state_machine.drawio.png)
 >
+
+
+# VI.   References
+> *  LogiCORE™ IP AXI Interconnect - XILINX
+> *  Introduction to AMBA AXI4 Issue 0101 102202 - ARM
