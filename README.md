@@ -41,3 +41,7 @@ write operation, it responds with a message to the master on the Write Response 
 >   * **W** for signals on the **Write Data** channel
 >   * **R** for signals on the **Read Data** channel 
 >   * **B** for signals on the **Write Response** channel 
+
+# IV. Concept AXI-LITE-INTERCONNECT
+
+> ![alt text](docs/AISoC-AXI_LITE_INTERCONNECT.drawio.png)
