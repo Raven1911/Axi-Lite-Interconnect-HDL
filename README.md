@@ -9,6 +9,13 @@ transactions to up to 16 connected slave devices.
 > * The Slave Interface (SI) of the core can be configured to comprise 1-16 SI slots to accept transactions from up to 
 3 connected master devices.
 > * Split Write Transaction and Read Transaction channels separately
-> * 32-bit address width
+> * Address width: 32 to 64 bits.
 > * Interface data widths: 32 bits.
 > * Fixed priority, time quantum(avoid deadlock) and round-robin arbitration.
+
+# III. Overview
+> AXI is an interface specification that defines the interface of IP blocks, rather than the interconnect 
+itself. The following diagram shows how AXI is used to interface an interconnect component:
+> ![alt text](docs/axi1.png)
+
+
