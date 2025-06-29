@@ -63,4 +63,18 @@ Write data paths) is not performed, as shown in Figure 5.
 > ![alt text](docs/axi5.png)
 
 ## 3.  N-to-M Interconnect
+> Parallel Write and Read data pathways connect each SI slot to all the MI slots that it can access, according to the
+configured sparse connectivity map. When more than one source has data to send to different destinations, data
+transfers can occur independently and concurrently, provided AXI ordering rules are met.
+
+> The Write address channels among all SI slots feed into a central address arbiter, which grants access to one SI slot
+at a time. It is also the case for the Read address channels. 
+
+> The winner of each arbitration cycle transfers its address information to the targeted MI slot, and pushes an entry
+into the appropriate command queue(s) that enable various data pathways to route data to the proper destination
+while enforcing AXI ordering rules.
+
 > ![alt text](docs/axi6.png)
+
+## 3.   Interconnect Architecture
+> ![alt text](docs/AXI_LITE_INTERCONNECT.drawio.png)
