@@ -75,6 +75,10 @@ into the appropriate command queue(s) that enable various data pathways to route
 while enforcing AXI ordering rules.
 
 > ![alt text](docs/axi6.png)
+> 
+# V. Design AXI-LITE-INTERCONNECT
 
-## 3.   Interconnect Architecture
+## 1.   Interconnect Architecture
 > ![alt text](docs/AXI_LITE_INTERCONNECT.drawio.png)
+
+## 2.   Arbiter State Machine
