@@ -1,7 +1,7 @@
 # Axi-Lite-Interconnect-HDL
 
 # I. Introduction
-> IP AXI Lite Interconnect core connects ONE or THREE AXI memory-mapped master devices to ONE or MORE memory-mapped slave devices. The AXI interfaces conform to the AMBA® AXI version 4 specification from ARM®.
+> IP AXI Lite Interconnect core connects ONE upto THREE AXI memory-mapped master devices to ONE or MORE memory-mapped slave devices. The AXI interfaces conform to the AMBA® AXI version 4 specification from ARM®.
 
 # II. Features
 > * The Master Interface (MI) can be configured to comprise 1-3 MI slots to issue 
