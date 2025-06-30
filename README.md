@@ -85,7 +85,15 @@ while enforcing AXI ordering rules.
 ![alt text](docs/AISoC-arbiter_state_machine.drawio.png)
 >
 
+# VI. Implementation FPGA
+## 1. Hierarchy module
+    axi_lite_interconnect
+    |-- axi_lite_arbiter
+        |-- timer_write_channel
+        |-- timer_read_channel
+    |-- axi_lite_decoder
+    |-- axi_lite_mux
 
-# VI.   References
-> *  LogiCORE™ IP AXI Interconnect - XILINX
-> *  Introduction to AMBA AXI4 Issue 0101 102202 - ARM
+# VII.   References
+> *  [LogiCORE™ IP AXI Interconnect - XILINX](https://docs.amd.com/v/u/en-US/ds768_axi_interconnect)
+> *  [Introduction to AMBA AXI4 Issue 0101 102202 - ARM](https://developer.arm.com/documentation/102202/0300/What-is-AMBA--and-why-use-it-)
