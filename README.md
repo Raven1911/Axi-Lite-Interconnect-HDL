@@ -88,11 +88,11 @@ while enforcing AXI ordering rules.
 # VI. Implementation FPGA
 ## 1. Hierarchy module
     axi_lite_interconnect
-    |-- axi_lite_arbiter
-        |-- timer_write_channel
-        |-- timer_read_channel
-    |-- axi_lite_decoder
-    |-- axi_lite_mux
+        |-- axi_lite_arbiter
+                |-- timer_write_channel
+                |-- timer_read_channel
+        |-- axi_lite_decoder
+        |-- axi_lite_mux
 
 # VII.   References
 > *  [LogiCORE™ IP AXI Interconnect - XILINX](https://docs.amd.com/v/u/en-US/ds768_axi_interconnect)
