@@ -74,35 +74,45 @@ module axi_lite_slave_interface_tb;
     ) duut (
         .clk_i(clk_i),
         .resetn_i(resetn_i),
+
         .i_axi_awaddr(i_axi_awaddr),
         .i_axi_awvalid(i_axi_awvalid),
         .o_axi_awready(o_axi_awready),
         .i_axi_awprot(i_axi_awprot),
+
         .i_axi_wdata(i_axi_wdata),
         .i_axi_wstrb(i_axi_wstrb),
         .i_axi_wvalid(i_axi_wvalid),
         .o_axi_wready(o_axi_wready),
+
         .o_axi_bresp(o_axi_bresp),
         .o_axi_bvalid(o_axi_bvalid),
         .i_axi_bready(i_axi_bready),
+
         .i_axi_araddr(i_axi_araddr),
         .i_axi_arvalid(i_axi_arvalid),
         .o_axi_arready(o_axi_arready),
         .i_axi_arprot(i_axi_arprot),
+
         .o_axi_rdata(o_axi_rdata),
         .o_axi_rvalid(o_axi_rvalid),
         .o_axi_rresp(o_axi_rresp),
         .i_axi_rready(i_axi_rready),
+
         .o_addr_w(o_addr_w),
         .o_awprot_w(o_awprot_w),
+
         .o_wen(o_wen),
         .o_data_w(o_data_w),
         .o_write_data_w(o_write_data_w),
-        .o_bresp_w(o_bresp_w),
+
+        .i_bresp_w(o_bresp_w),
+
         .o_addr_r(o_addr_r),
         .o_arprot_r(o_arprot_r),
+        
         .i_data_r(i_data_r),
-        .o_rresp_r(o_rresp_r),
+        .i_rresp_r(o_rresp_r),
         .o_read_data_r(o_read_data_r)
     );
 

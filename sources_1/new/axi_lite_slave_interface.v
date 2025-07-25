@@ -24,7 +24,7 @@ module axi_lite_slave_interface#(
     parameter TRANS_W_STRB_W = 4,       // width strobe
     parameter TRANS_WR_RESP_W = 2,      // width response
     parameter TRANS_PROT      = 3,
-    parameter CYCLE_CLOCK = 2
+    parameter CYCLE_CLOCK = 3
 )(
     input                               clk_i,
     input                               resetn_i,
@@ -68,13 +68,13 @@ module axi_lite_slave_interface#(
     output      [DATA_WIDTH-1:0]        o_data_w,
     output                              o_write_data_w,
 
-    input       [TRANS_WR_RESP_W-1:0]   o_bresp_w,
+    input       [TRANS_WR_RESP_W-1:0]   i_bresp_w,
 
     output      [ADDR_WIDTH-1:0]        o_addr_r,
     output      [TRANS_PROT-1:0]        o_arprot_r,
 
     input       [DATA_WIDTH-1:0]        i_data_r,
-    input       [TRANS_WR_RESP_W-1:0]   o_rresp_r,
+    input       [TRANS_WR_RESP_W-1:0]   i_rresp_r,
     output                              o_read_data_r
 
     );
@@ -95,10 +95,10 @@ module axi_lite_slave_interface#(
     );
 
     // Instantiate the DFF module
-    register_DFF #(
+    register_DFF_negedge #(
         .SIZE_BITS(ADDR_WIDTH)
     ) register_DFF_AW_0 (
-        .clk_i(axi_awready),
+        .clkn_i(axi_awready),
         .resetn_i(resetn_i),
         .D_i(i_axi_awaddr),
         .Q_o(o_addr_w)
@@ -161,7 +161,7 @@ module axi_lite_slave_interface#(
     ) register_DFF_B_0 (
         .clk_i(axi_bvalid),
         .resetn_i(resetn_i),
-        .D_i(o_bresp_w),
+        .D_i(i_bresp_w),
         .Q_o(o_axi_bresp)
     );
 
@@ -179,10 +179,10 @@ module axi_lite_slave_interface#(
         .tick_timer(axi_arready)
     );  
 
-    register_DFF #(
+    register_DFF_negedge #(
         .SIZE_BITS(ADDR_WIDTH)
     ) register_DFF_AR_0 (
-        .clk_i(axi_arready),
+        .clkn_i(axi_arready),
         .resetn_i(resetn_i),
         .D_i(i_axi_araddr),
         .Q_o(o_addr_r)
@@ -222,7 +222,7 @@ module axi_lite_slave_interface#(
     ) register_DFF_R_1 (
         .clk_i(axi_rvalid),
         .resetn_i(resetn_i),
-        .D_i(o_rresp_r),
+        .D_i(i_rresp_r),
         .Q_o(o_axi_rresp)
     );
 
@@ -262,6 +262,27 @@ module register_DFF#(
     end
 
 endmodule
+
+module register_DFF_negedge#(
+    SIZE_BITS = 32
+)(  
+    input                           clkn_i,
+    input                           resetn_i,
+    input       [SIZE_BITS-1:0]     D_i,
+
+    output  reg [SIZE_BITS-1:0]     Q_o
+);
+    always @(negedge clkn_i, negedge resetn_i) begin
+        if (~resetn_i) begin
+            Q_o <= 0;
+        end
+        else begin
+            Q_o <= D_i;
+        end
+    end
+
+endmodule
+
 
 module tick_timer#(
     parameter CYCLE_CLOCK = 2 // cycle
@@ -307,3 +328,5 @@ module tick_timer#(
     assign tick_timer = tick_reg;
 
 endmodule
+
+
