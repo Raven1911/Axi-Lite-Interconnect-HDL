@@ -886,6 +886,7 @@ module mux_ID_arbiter#(
 endmodule
 
 //////////////////////////////////////////////DEADLOCK TIMER//////////////////////////////////////////
+
 module DLock_timer#(
     parameter QUANTUM_TIME = 16 // cycle
 
@@ -898,7 +899,8 @@ module DLock_timer#(
 
 );
 
-    reg [$clog2(QUANTUM_TIME)-1:0] count_next, count_reg;
+    reg [$clog2(QUANTUM_TIME)-1:0] count_next;
+    reg [$clog2(QUANTUM_TIME)-1:0] count_reg; 
     reg                            tick_next, tick_reg;
 
     always @(posedge clk_i or negedge resetn_i) begin
@@ -913,7 +915,7 @@ module DLock_timer#(
     end
 
     always @(*) begin
-        count_next = 0;
+        count_next = count_reg;
         tick_next = 0;
         if (start_i) begin
             if (count_reg >= QUANTUM_TIME - 1) begin

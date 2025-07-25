@@ -64,7 +64,8 @@ module axi_lite_interconnect #(
         // // Master 4: bit 4 = 1, others = 0
         // { {(NUM_MASTERS-5){1'b0}}, 1'b1, {4{1'b0}} },
         // Master 3: bit 3 = 1, others = 0
-        { {(NUM_MASTERS-4){1'b0}}, 1'b1, {3{1'b0}} },
+        { 1'b1, {(NUM_MASTERS-1){1'b0}} },
+        // { {(NUM_MASTERS-4){1'b0}}, 1'b1, {3{1'b0}} },
         // Master 2: bit 2 = 1, others = 0
         { {(NUM_MASTERS-3){1'b0}}, 1'b1, {2{1'b0}} },
         // Master 1: bit 1 = 1, others = 0
