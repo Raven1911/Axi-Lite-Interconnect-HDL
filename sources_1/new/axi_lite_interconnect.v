@@ -260,9 +260,9 @@ module axi_lite_interconnect #(
                 .s_axi_rvalid_i(s_axi_rvalid_i),
                 .s_axi_rready_o(s_axi_rready_o),
 
-                .grant_permission_W_W_i(),
-                .grant_permission_B_W_i(),
-                .grant_permission_R_R_i()
+                .grant_permission_W_W_i('b0),
+                .grant_permission_B_W_i('b0),
+                .grant_permission_R_R_i('b0)
             );
         end
 
