@@ -21,7 +21,6 @@
 
 
 
-
 module axi_interconnect_n_1#(
     // Transaction configuration
     parameter ADDR_WIDTH = 32,          // Address width
@@ -193,7 +192,8 @@ module axi_interconnect_n_1#(
     ) AW_DLock_timer (
         .clk_i(m_axi_aclk_i),
         .start_i(s_axi_awvalid_o),
-        .resetn_i(m_axi_aresetn_i || !s_axi_awready_i),
+        .set_i(s_axi_awready_i),
+        .resetn_i(m_axi_aresetn_i), // || !s_axi_awready_i
         .tick_timer(grant_permission_AW_W)
     );
 
@@ -239,7 +239,8 @@ module axi_interconnect_n_1#(
     ) W_DLock_timer (
         .clk_i(m_axi_aclk_i),
         .start_i(s_axi_wvalid_o),
-        .resetn_i(m_axi_aresetn_i || !s_axi_wready_i),
+        .set_i(s_axi_wready_i),
+        .resetn_i(m_axi_aresetn_i),
         .tick_timer(grant_permission_W_W)
     );
 
@@ -266,7 +267,8 @@ module axi_interconnect_n_1#(
     ) B_DLock_timer (
         .clk_i(m_axi_aclk_i),
         .start_i(s_axi_bready_o),
-        .resetn_i(m_axi_aresetn_i || !s_axi_bvalid_i),
+        .set_i(s_axi_bvalid_i),
+        .resetn_i(m_axi_aresetn_i),
         .tick_timer(grant_permission_B_W)
     );
 
@@ -299,7 +301,8 @@ module axi_interconnect_n_1#(
     ) AR_DLock_timer (
         .clk_i(m_axi_aclk_i),
         .start_i(s_axi_arvalid_o),
-        .resetn_i(m_axi_aresetn_i || !s_axi_arready_i),
+        .set_i(s_axi_arready_i),
+        .resetn_i(m_axi_aresetn_i), // || !s_axi_arready_i
         .tick_timer(grant_permission_AR_R)
     );
 
@@ -345,7 +348,8 @@ module axi_interconnect_n_1#(
     ) R_DLock_timer (
         .clk_i(m_axi_aclk_i),
         .start_i(s_axi_rready_o),
-        .resetn_i(m_axi_aresetn_i || !s_axi_rvalid_i),
+        .set_i(s_axi_rvalid_i),
+        .resetn_i(m_axi_aresetn_i),
         .tick_timer(grant_permission_R_R)
     );
 
@@ -886,21 +890,19 @@ module mux_ID_arbiter#(
 endmodule
 
 //////////////////////////////////////////////DEADLOCK TIMER//////////////////////////////////////////
-
 module DLock_timer#(
     parameter QUANTUM_TIME = 16 // cycle
 
 )(  
     input   clk_i,
     input   start_i,
+    input   set_i,
     input   resetn_i,
-
     output  tick_timer
 
 );
 
-    reg [$clog2(QUANTUM_TIME)-1:0] count_next;
-    reg [$clog2(QUANTUM_TIME)-1:0] count_reg; 
+    reg [$clog2(QUANTUM_TIME)-1:0] count_next, count_reg;
     reg                            tick_next, tick_reg;
 
     always @(posedge clk_i or negedge resetn_i) begin
@@ -921,6 +923,9 @@ module DLock_timer#(
             if (count_reg >= QUANTUM_TIME - 1) begin
                 count_next = 0;
                 tick_next = 1;
+            end
+            else if(set_i) begin
+                count_next = 0;
             end
             else begin  
                 count_next = count_next + 1;

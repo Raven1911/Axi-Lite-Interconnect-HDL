@@ -18,13 +18,14 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
+
 module axi_lite_slave_interface#(
     parameter ADDR_WIDTH = 32,          // Address width
     parameter DATA_WIDTH = 32,          // Data width
     parameter TRANS_W_STRB_W = 4,       // width strobe
     parameter TRANS_WR_RESP_W = 2,      // width response
     parameter TRANS_PROT      = 3,
-    parameter CYCLE_CLOCK = 3
+    parameter CYCLE_CLOCK = 2
 )(
     input                               clk_i,
     input                               resetn_i,
@@ -91,6 +92,7 @@ module axi_lite_slave_interface#(
         .clk_i(clk_i),
         .start_i(i_axi_awvalid),
         .resetn_i(i_axi_awvalid),
+        .set_i(axi_awready),
         .tick_timer(axi_awready)
     );
 
@@ -121,6 +123,7 @@ module axi_lite_slave_interface#(
         .clk_i(clk_i),
         .start_i(i_axi_wvalid),
         .resetn_i(i_axi_wvalid),
+        .set_i(axi_wready),
         .tick_timer(axi_wready)
     );
 
@@ -153,6 +156,7 @@ module axi_lite_slave_interface#(
         .clk_i(clk_i),
         .start_i(i_axi_bready),
         .resetn_i(i_axi_bready),
+        .set_i(axi_bvalid),
         .tick_timer(axi_bvalid)
     );
 
@@ -176,6 +180,7 @@ module axi_lite_slave_interface#(
         .clk_i(clk_i),
         .start_i(i_axi_arvalid),
         .resetn_i(i_axi_arvalid),
+        .set_i(axi_arready),
         .tick_timer(axi_arready)
     );  
 
@@ -205,6 +210,7 @@ module axi_lite_slave_interface#(
         .clk_i(clk_i),
         .start_i(i_axi_rready),
         .resetn_i(i_axi_rready),
+        .set_i(axi_rvalid),
         .tick_timer(axi_rvalid)
     );
 
@@ -291,6 +297,7 @@ module tick_timer#(
     input   clk_i,
     input   start_i,
     input   resetn_i,
+    input   set_i,
 
     output  tick_timer
 
@@ -304,6 +311,8 @@ module tick_timer#(
             count_reg <= 0;
             tick_reg <= 0;
         end
+
+        
         else begin
             tick_reg <= tick_next;
             count_reg <= count_next;
@@ -317,6 +326,9 @@ module tick_timer#(
             if (count_reg >= CYCLE_CLOCK - 1) begin
                 count_next = 0;
                 tick_next = 1;
+            end
+            else if (set_i)begin
+                count_next = 0;
             end
             else begin  
                 count_next = count_next + 1;
