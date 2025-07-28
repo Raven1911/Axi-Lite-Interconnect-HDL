@@ -1,16 +1,16 @@
 # Axi-Lite-Interconnect-HDL
 
 # I. Introduction
- IP AXI Lite Interconnect core connects ONE upto THREE AXI memory-mapped master devices to ONE or MORE memory-mapped slave devices. The AXI interfaces conform to the AMBA® AXI version 4 specification from ARM®.
+ IP AXI Lite Interconnect core connects ONE upto MORE AXI memory-mapped master devices to ONE or MORE memory-mapped slave devices. The AXI interfaces conform to the AMBA® AXI version 4 specification from ARM®.
 
 # II. Features
-* The Master Interface (MI) can be configured to comprise 1-3 MI slots to issue 
-transactions to up to 16 connected slave devices.
-* The Slave Interface (SI) of the core can be configured to comprise 1-16 SI slots to accept transactions from up to 
-3 connected master devices.
+* The Master Interface (MI) can be configured to comprise 1-16 or more MI slots to issue 
+transactions to up to 16 or more connected slave devices.
+* The Slave Interface (SI) of the core can be configured to comprise 1-16 or more SI slots to accept transactions from up to 
+16 or more connected master devices.
 * Split Write Transaction and Read Transaction channels separately
-* Address width: 32 to 64 bits.
-* Interface data widths: 32 bits.
+* Address width: 32, 64 bits,...
+* Interface data widths: 32, 64 bits,....
 * Fixed priority, time quantum(avoid deadlock) and round-robin arbitration.
 
 # III. Overview
@@ -104,8 +104,7 @@ For 1 to n:
 Detail circuit:
 >![alt text](docs/ar_2.png)
 
-# VI. Implementation FPGA
-## 1. Hierarchy module
+# VI. Hierarchy module
     axi_lite_interconnect
         |-- axi_interconnect_n_1
         |-- axi_interconnect_1_n
