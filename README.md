@@ -56,7 +56,7 @@ clock rate conversion, can also be performed in this configuration as shown in F
 
 >![alt text](docs/axi4.png)
 
-Detail circuit:
+Detail diagram:
 >![alt text](docs/n_1.png)
 ## 2.  1-to-N Interconnect
 Another degenerative configuration of the AXI Interconnect core occurs when a single master device, typically, a 
@@ -65,7 +65,7 @@ Write data paths) is not performed, as shown in Figure 5.
 
 > ![alt text](docs/axi5.png)
 
-Detail circuit:
+Detail diagram:
 >![alt text](docs/1_n.png)
 
 ## 3.  N-to-M Interconnect
@@ -98,9 +98,11 @@ For n to 1:
 For 1 to n:
 > ![alt text](docs/dt_1_n.png)
 
-## 3.   Arbiter State Machine
-![alt text](docs/AISoC-arbiter_state_machine.drawio.png)
->
+## 3.   Arbiter Module
+>![alt text](docs/ar_1.png)
+
+Detail circuit:
+>![alt text](docs/ar_2.png)
 
 # VI. Implementation FPGA
 ## 1. Hierarchy module
