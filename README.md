@@ -55,12 +55,18 @@ optional address range validation is enabled). Any of the optional conversion fu
 clock rate conversion, can also be performed in this configuration as shown in Figure 4.
 
 >![alt text](docs/axi4.png)
+
+Detail circuit:
+>![alt text](docs/n_1.png)
 ## 2.  1-to-N Interconnect
 Another degenerative configuration of the AXI Interconnect core occurs when a single master device, typically, a 
 processor, accesses multiple memory-mapped slave peripherals. In these cases, arbitration (in the address and 
 Write data paths) is not performed, as shown in Figure 5.
 
 > ![alt text](docs/axi5.png)
+
+Detail circuit:
+>![alt text](docs/1_n.png)
 
 ## 3.  N-to-M Interconnect
 Parallel Write and Read data pathways connect each SI slot to all the MI slots that it can access, according to the
@@ -75,24 +81,33 @@ into the appropriate command queue(s) that enable various data pathways to route
 while enforcing AXI ordering rules.
 
 > ![alt text](docs/axi6.png)
+
+Detail circuit:
+>![alt text](docs/n_n.png)
+
  
 # V. Design AXI-LITE-INTERCONNECT
 
 ## 1.   Interconnect Architecture
-> ![alt text](docs/AXI_LITE_INTERCONNECT.drawio.png)
+> ![alt text](docs/n_n.png)
 
-## 2.   Arbiter State Machine
+## 2. Detail circuit
+For n to 1:
+> ![alt text](docs/dt_n_1.png)
+
+For 1 to n:
+> ![alt text](docs/dt_1_n.png)
+
+## 3.   Arbiter State Machine
 ![alt text](docs/AISoC-arbiter_state_machine.drawio.png)
 >
 
 # VI. Implementation FPGA
 ## 1. Hierarchy module
     axi_lite_interconnect
-        |-- axi_lite_arbiter
-                |-- timer_write_channel
-                |-- timer_read_channel
-        |-- axi_lite_decoder
-        |-- axi_lite_mux
+        |-- axi_interconnect_n_1
+        |-- axi_interconnect_1_n
+
 
 # VII.   References
 > *  [LogiCORE™ IP AXI Interconnect - XILINX](https://docs.amd.com/v/u/en-US/ds768_axi_interconnect)
